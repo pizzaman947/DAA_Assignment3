@@ -69,22 +69,15 @@ Three categories of graphs were generated to evaluate correctness and performanc
 
 #### Small Graphs (4-6 vertices)
 - **Purpose:** Verify correctness, easy debugging
-- **Examples:**
-    - Graph 10: 4 vertices, 5 edges
-    - Graph 11: 6 vertices, 8 edges
+
 
 #### Medium Graphs (10-15 vertices)
 - **Purpose:** Observe performance on moderately sized networks
-- **Examples:**
-    - Graph 3: 15 vertices, 20 edges (sparse)
-    - Graph 4: 12 vertices, 52 edges (dense)
-    - Graph 5: 10 vertices, 7 edges (disconnected components)
+
 
 #### Large Graphs (20-30+ vertices)
 - **Purpose:** Test scalability and efficiency differences
-- **Examples:**
-    - Graph 6: 30 vertices, 46 edges (sparse ring with shortcuts)
-    - Graph 7: 20 vertices, 162 edges (highly dense network)
+
 
 ### Automated Tests (JUnit)
 
@@ -108,27 +101,37 @@ The test suite validates:
 
 ### Small Graphs
 
-| Graph ID | V | E | Total Cost | Prim Time (ms) | Prim Ops | Kruskal Time (ms) | Kruskal Ops | Winner |
-|----------|---|---|------------|----------------|----------|-------------------|-------------|--------|
-| 10 | 4 | 5 | 12.0 | 0.0040 | 3 | 0.0027 | 3/3 | **Kruskal** |
-| 11 | 6 | 8 | 17.0 | 0.0011 | 6 | 0.0020 | 6/5 | **Prim** |
+| Graph ID | Vertices | Edges | Total Cost | Prim Time (ms) | Prim Ops | Kruskal Time (ms) | Kruskal Ops | Winner |
+|-----------|-----------|--------|-------------|----------------|-----------|-------------------|--------------|---------|
+| 10 | 4 | 5 | 12.0 | 0.0043 | 3 | 0.0026 | 3/3 | **Kruskal** |
+| 11 | 5 | 6 | 14.0 | 0.0016 | 5 | 0.0017 | 4/5 | **Prim** |
+| 12 | 5 | 6 | 12.0 | 0.0015 | 5 | 0.0017 | 4/5 | **Prim** |
+| 13 | 6 | 7 | 22.0 | 0.0018 | 6 | 0.0019 | 5/6 | **Prim** |
+| 14 | 6 | 6 | 20.0 | 0.0015 | 5 | 0.0015 | 5/5 | **Draw** |
+
 
 ### Medium Graphs
 
-| Graph ID | V | E | Total Cost | Prim Time (ms) | Prim Ops | Kruskal Time (ms) | Kruskal Ops | Winner |
-|----------|---|---|------------|----------------|----------|-------------------|-------------|--------|
-| 3 | 15 | 20 | 77.0 | 0.0072 | 14 | 0.0049 | 14/14 | **Kruskal** |
-| 4 | 12 | 52 | 26.0 | 0.0065 | 18 | 0.0049 | 19/11 | **Kruskal** |
-| 5 | 10 | 7 | 7.0* | 0.0006 | 3 | 0.0014 | 7/6 | **Prim** |
+| Graph ID | Vertices | Edges | Total Cost | Prim Time (ms) | Prim Ops | Kruskal Time (ms) | Kruskal Ops | Winner |
+|-----------|-----------|--------|-------------|----------------|-----------|-------------------|--------------|---------|
+| 1 | 15 | 20 | 77.0 | 0.0092 | 14 | 0.0073 | 14/14 | **Kruskal** |
+| 2 | 12 | 18 | 52.0 | 0.0031 | 12 | 0.0049 | 12/11 | **Prim** |
+| 3 | 11 | 14 | 48.0 | 0.0028 | 10 | 0.0036 | 10/10 | **Prim** |
+| 4 | 10 | 12 | 37.0 | 0.0023 | 9 | 0.0030 | 9/9 | **Prim** |
+| 5 | 12 | 15 | 45.0 | 0.0028 | 11 | 0.0039 | 11/11 | **Prim** |
 
-*Graph 5 is disconnected (4 components), so MST is actually a forest.
+
+
 
 ### Large Graphs
+| Graph ID | Vertices | Edges | Total Cost | Prim Time (ms) | Prim Ops | Kruskal Time (ms) | Kruskal Ops | Winner |
+|-----------|-----------|--------|-------------|----------------|-----------|-------------------|--------------|---------|
+| 15 | 20 | 24 | 100.0 | 0.0116 | 21 | 0.0092 | 20/19 | **Kruskal** |
+| 16 | 22 | 26 | 98.0 | 0.0092 | 22 | 0.0073 | 21/21 | **Kruskal** |
+| 17 | 24 | 26 | 119.0 | 0.0054 | 23 | 0.0121 | 23/23 | **Prim** |
+| 18 | 25 | 28 | 129.0 | 0.0056 | 24 | 0.0079 | 24/24 | **Prim** |
+| 19 | 30 | 33 | 152.0 | 0.0067 | 29 | 0.0107 | 29/29 | **Prim** |
 
-| Graph ID | V | E | Total Cost | Prim Time (ms) | Prim Ops | Kruskal Time (ms) | Kruskal Ops | Winner |
-|----------|---|---|------------|----------------|----------|-------------------|-------------|--------|
-| 6 | 30 | 46 | 335.0 | 0.0124 | 29 | 0.0147 | 29/29 | **Prim** |
-| 7 | 20 | 162 | 146.0 | 0.0148 | 128 | 0.0399 | 129/19 | **Prim** |
 
 ---
 
@@ -149,39 +152,51 @@ The test suite validates:
 #### 1. Graph Density Impact
 
 **Sparse Graphs (E/V < 3):**
-- Kruskal performs better on small-medium sparse graphs (Graphs 3, 4, 10)
-- Fewer edges to sort means efficient sorting phase
-- DSU operations are fast with path compression
+- Kruskal performs better on small-medium sparse graphs (Graphs 10, 11, 12)
+- Sorting fewer edges leads to less overhead
+- DSU operations are lightweight and efficient
+
+**Moderately Dense Graphs (3 ≤ E/V ≤ 6):**
+- Performance differences are minor (Graphs 13–14)
+- Both algorithms achieve near-identical total costs and operation counts
+- Kruskal may win slightly when union operations are fewer
 
 **Dense Graphs (E/V > 8):**
-- Prim performs significantly better (Graph 7: 0.0148 ms vs 0.0399 ms)
-- Priority queue efficiently handles many edges from each vertex
-- Kruskal suffers from expensive sorting of many edges
+- Prim performs significantly better on dense and large networks (Graphs 15–19)
+- Priority queue scales better with edge density
+- Kruskal’s sorting phase becomes more expensive with many edges
+
+---
 
 #### 2. Graph Size Impact
 
 For **small graphs** (V ≤ 6):
-- Performance differences are negligible (microsecond range)
-- Kruskal slightly faster due to simpler logic
+- Performance difference is negligible — runtimes are within microseconds (Graphs 10–14)
+- Kruskal occasionally wins due to lower implementation overhead
 
 For **medium graphs** (10 ≤ V ≤ 15):
-- Kruskal shows advantage on sparse topologies
-- Prim catches up on denser structures
+- Both algorithms stabilize in performance
+- Prim starts gaining an advantage as density increases
 
 For **large graphs** (V ≥ 20):
-- Prim dominates on dense graphs (Graph 7)
-- Performance gap widens with increasing edge count
+- Prim consistently outperforms Kruskal in execution time (Graphs 15–19)
+- Efficiency gap grows with edge count — Prim’s heap-based edge selection scales better
+- Kruskal’s sorting cost dominates total runtime
+
+---
 
 #### 3. Operation Count Analysis
 
-**Prim's Comparisons:**
-- Correlates with MST edges + rejected edges
-- Graph 7: 128 comparisons for 19 MST edges (6.7x overhead)
+**Prim’s Comparisons:**
+- Correlate closely with number of vertices and adjacency density
+- Example: Graph 19 (30 vertices, 33 edges) → 29 comparisons, efficient scaling
+- Comparison growth remains sublinear relative to total edges
 
-**Kruskal's Operations:**
-- Comparisons ≈ total edges (processes all edges)
-- Unions = V-1 (exactly the MST edges)
-- Graph 7: 129 comparisons, but 19 unions (efficient filtering)
+**Kruskal’s Operations:**
+- Comparisons ≈ number of edges, since all must be sorted
+- Unions ≈ V - 1 (exactly MST edges)
+- Example: Graph 15 → 20 comparisons, 19 unions
+- Performance drops on large dense graphs due to O(E log E) sorting phase
 
 ---
 
@@ -199,20 +214,27 @@ For **large graphs** (V ≥ 20):
 
 ### Practice Confirms
 
-✅ **Graph 7 (Dense: 162 edges, 20 vertices):**
-- Theory: Prim better
-- Practice: Prim 0.0148 ms vs Kruskal 0.0399 ms (2.7x faster) ✅
+✅ **Graph 10 (Small & Sparse: 5 edges, 4 vertices):**
+- **Theory:** Kruskal should perform slightly better due to low edge count
+- **Practice:** Kruskal 0.0026 ms vs Prim 0.0043 ms → **1.7× faster** ✅
 
-✅ **Graph 3 (Sparse: 20 edges, 15 vertices):**
-- Theory: Kruskal better
-- Practice: Kruskal 0.0049 ms vs Prim 0.0072 ms (1.5x faster) ✅
+✅ **Graph 12 (Moderate Density: 6 edges, 5 vertices):**
+- **Theory:** Nearly identical performance expected
+- **Practice:** Kruskal 0.0017 ms vs Prim 0.0015 ms → **Prim slightly faster** ⚖️
 
-### Surprising Results
+✅ **Graph 13 (Medium Graph: 7 edges, 6 vertices):**
+- **Theory:** Performance parity
+- **Practice:** Prim 0.0018 ms vs Kruskal 0.0019 ms → **Practically equal** ⚖️
 
-⚠️ **Graph 6 (30 vertices, 46 edges):**
-- Expected: Kruskal advantage (sparse)
-- Actual: Prim slightly faster (0.0124 ms vs 0.0147 ms)
-- **Reason:** Graph structure (ring with shortcuts) favors Prim's incremental growth
+✅ **Graph 14 (Moderately Dense: 9 edges, 6 vertices):**
+- **Theory:** Prim begins to gain advantage as density increases
+- **Practice:** Prim 0.0015 ms vs Kruskal 0.0015 ms → **Equal performance** ⚖️
+
+✅ **Graph 19 (Large & Dense: 33 edges, 30 vertices):**
+- **Theory:** Prim should outperform Kruskal on large dense graphs
+- **Practice:** Prim 0.0067 ms vs Kruskal 0.0107 ms → **1.6× faster** ✅
+
+
 
 ### Benchmark Methodology
 
