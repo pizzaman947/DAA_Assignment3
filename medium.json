@@ -1,0 +1,80 @@
+{
+  "graphs": [
+    {
+      "id": 3,
+      "nodes": [
+        "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10",
+        "M11", "M12", "M13", "M14", "M15"
+      ],
+      "edges": [
+        {"from": "M1", "to": "M2", "weight": 5},
+        {"from": "M2", "to": "M3", "weight": 7},
+        {"from": "M1", "to": "M4", "weight": 3},
+        {"from": "M3", "to": "M5", "weight": 8},
+        {"from": "M4", "to": "M6", "weight": 4},
+        {"from": "M5", "to": "M7", "weight": 6},
+        {"from": "M6", "to": "M8", "weight": 9},
+        {"from": "M7", "to": "M9", "weight": 2},
+        {"from": "M8", "to": "M10", "weight": 5},
+        {"from": "M9", "to": "M11", "weight": 7},
+        {"from": "M10", "to": "M12", "weight": 3},
+        {"from": "M11", "to": "M13", "weight": 8},
+        {"from": "M12", "to": "M14", "weight": 4},
+        {"from": "M13", "to": "M15", "weight": 6},
+        {"from": "M1", "to": "M8", "weight": 12},
+        {"from": "M2", "to": "M9", "weight": 11},
+        {"from": "M3", "to": "M10", "weight": 10},
+        {"from": "M4", "to": "M11", "weight": 14},
+        {"from": "M5", "to": "M12", "weight": 13},
+        {"from": "M6", "to": "M13", "weight": 15}
+      ]
+    },
+    {
+      "id": 4,
+      "nodes": [
+        "N1", "N2", "N3", "N4", "N5", "N6", "N7", "N8", "N9", "N10", "N11", "N12"
+      ],
+      "edges": [
+        {"from": "N1", "to": "N2", "weight": 4}, {"from": "N1", "to": "N3", "weight": 2},
+        {"from": "N1", "to": "N4", "weight": 5}, {"from": "N1", "to": "N5", "weight": 7},
+        {"from": "N2", "to": "N3", "weight": 1}, {"from": "N2", "to": "N4", "weight": 8},
+        {"from": "N2", "to": "N6", "weight": 6}, {"from": "N2", "to": "N7", "weight": 3},
+        {"from": "N3", "to": "N5", "weight": 9}, {"from": "N3", "to": "N6", "weight": 11},
+        {"from": "N4", "to": "N7", "weight": 10}, {"from": "N4", "to": "N8", "weight": 2},
+        {"from": "N5", "to": "N8", "weight": 5}, {"from": "N5", "to": "N9", "weight": 4},
+        {"from": "N6", "to": "N9", "weight": 7}, {"from": "N6", "to": "N10", "weight": 8},
+        {"from": "N7", "to": "N10", "weight": 6}, {"from": "N7", "to": "N11", "weight": 3},
+        {"from": "N8", "to": "N11", "weight": 9}, {"from": "N8", "to": "N12", "weight": 1},
+        {"from": "N9", "to": "N12", "weight": 5}, {"from": "N10", "to": "N12", "weight": 2},
+        {"from": "N11", "to": "N12", "weight": 4}, {"from": "N1", "to": "N10", "weight": 15},
+        {"from": "N2", "to": "N11", "weight": 14}, {"from": "N3", "to": "N12", "weight": 13},
+        {"from": "N4", "to": "N5", "weight": 12}, {"from": "N6", "to": "N7", "weight": 10},
+        {"from": "N8", "to": "N9", "weight": 8}, {"from": "N10", "to": "N11", "weight": 6},
+        {"from": "N1", "to": "N6", "weight": 5}, {"from": "N1", "to": "N7", "weight": 8},
+        {"from": "N1", "to": "N8", "weight": 9}, {"from": "N1", "to": "N9", "weight": 3},
+        {"from": "N1", "to": "N11", "weight": 7}, {"from": "N1", "to": "N12", "weight": 6},
+        {"from": "N2", "to": "N5", "weight": 4}, {"from": "N2", "to": "N8", "weight": 2},
+        {"from": "N2", "to": "N9", "weight": 1}, {"from": "N2", "to": "N10", "weight": 3},
+        {"from": "N2", "to": "N12", "weight": 7}, {"from": "N3", "to": "N4", "weight": 5},
+        {"from": "N3", "to": "N7", "weight": 8}, {"from": "N3", "to": "N8", "weight": 9},
+        {"from": "N3", "to": "N9", "weight": 11}, {"from": "N3", "to": "N10", "weight": 10},
+        {"from": "N3", "to": "N11", "weight": 12}, {"from": "N4", "to": "N6", "weight": 13},
+        {"from": "N4", "to": "N9", "weight": 14}, {"from": "N4", "to": "N10", "weight": 15},
+        {"from": "N4", "to": "N11", "weight": 16}, {"from": "N4", "to": "N12", "weight": 17}
+      ]
+    },
+    {
+      "id": 5,
+      "nodes": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10"],
+      "edges": [
+        {"from": "D1", "to": "D2", "weight": 5},
+        {"from": "D2", "to": "D3", "weight": 4},
+        {"from": "D1", "to": "D3", "weight": 3},
+        {"from": "D4", "to": "D5", "weight": 8},
+        {"from": "D5", "to": "D6", "weight": 2},
+        {"from": "D7", "to": "D8", "weight": 6},
+        {"from": "D9", "to": "D10", "weight": 7}
+      ]
+    }
+  ]
+}
